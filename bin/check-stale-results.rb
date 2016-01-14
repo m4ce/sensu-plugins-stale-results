@@ -9,16 +9,17 @@ require 'net/http'
 require 'json'
 require 'sensu-plugin/utils'
 require 'sensu-plugin/check/cli'
+require 'chronic_duration'
 
 class CheckStaleResults < Sensu::Plugin::Check::CLI
   include Sensu::Plugin::Utils
 
   option :stale,
-         :description => "Number of seconds to consider a check result stale (default: 86400)",
-         :short => "-s <SECONDS>",
-         :long => "--stale <SECONDS>",
-         :proc => proc(&:to_i),
-         :default => 86400
+         :description => "Elapsed time to consider a check result result (default: 1d)",
+         :short => "-s <TIME>",
+         :long => "--stale <TIME>",
+         :proc => proc { |s| ChronicDuration.parse(s) },
+         :default => ChronicDuration.parse('1d')
 
   option :verbose,
          :description => "Be verbose",

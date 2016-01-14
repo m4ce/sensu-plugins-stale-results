@@ -34,4 +34,5 @@ Gem::Specification.new do |s|
   s.version                = SensuPluginsStaleResults::Version::VER_STRING
 
   s.add_runtime_dependency 'sensu-plugin',   '1.2.0'
+  s.add_runtime_dependency 'chronic_duration',   '0.10.6'
 end
